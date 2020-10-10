@@ -1,4 +1,4 @@
-package Test;
+package Torok;
 
 import java.util.Scanner;
 
