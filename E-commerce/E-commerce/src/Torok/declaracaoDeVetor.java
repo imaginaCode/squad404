@@ -1,4 +1,4 @@
-package Test;
+package Torok;
 
 public class declaracaoDeVetor {
 
