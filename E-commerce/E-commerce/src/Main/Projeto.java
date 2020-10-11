@@ -11,11 +11,12 @@ public class Projeto {
 	public static Scanner leia = new Scanner(System.in);;
 
 	public static int cod[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-			quantEstoque[] = { 16, 10, 30, 25, 29, 12, 18, 22, 26, 11 },
+			quantEstoque[] = { 16, 10, 30, 25, 29, 12, 18, 22, 26, 11 },			
 			 quantIn[] = new int[10];
 	
 	public static double valorUnitario[] = { 86, 90, 40, 35, 50, 60, 32, 30, 50, 63 },
 			valorTotal[] = new double[10],
+			valorTotalCarrinho, impostoTotalCarrinho,
 			valorTaxa[] = new double[10];
 
 	public static String produtoNome[] = { "PythonMan", "Else Kruger", "Noite dos Errors", "O Jorro",
@@ -24,9 +25,8 @@ public class Projeto {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		compra();		
+				
 		
-		imprimirEstoque();
 		
 		
 		leia.close();
@@ -49,17 +49,43 @@ public class Projeto {
 	public static void imprimirEstoque() 
 	{
 		int contador = 0;
+		linha();
 
 		System.out.println("CÓDIGO--------Estoque-----------Valor-----------Fantasia\n");
 		for(contador=0;contador<10;contador++)
 		{
 
-
+			
 			System.out.printf("   %d\t\t%d\t\t%.2f\t\t%s\n",cod[contador],quantEstoque[contador],valorUnitario[contador],produtoNome[contador]);
 
 
 		}
 
+	}
+	public static void linha() {
+		System.out.println("*******************************************************************************");
+	}
+	
+	public static void imprimirCarrinho() 
+	{
+		int contador = 0;
+		valorTotalCarrinho =0;
+		impostoTotalCarrinho = 0;
+		linha();
+		System.out.println("CÓDIGO---Quant---Valor Unitario(R$)---Imposto(R$)---Total(R$)---Fantasia\n");
+		for(contador=0;contador<10;contador++)
+		{
+
+			if(quantIn[contador]>0)	{
+				System.out.printf("  %d\t   %d\t\t%.2f\t\t%.2f\t      %.2f\t%s\n",cod[contador],quantIn[contador],valorUnitario[contador],valorTaxa[contador],valorTotal[contador],produtoNome[contador]);
+				valorTotalCarrinho += valorTotal[contador];
+				impostoTotalCarrinho += valorTaxa[contador];
+			}
+		}
+		linha();
+		System.out.printf("Total de imposto é :R$%.2f \n",impostoTotalCarrinho);
+		System.out.printf("Total a pagar é :R$%.2f \n",valorTotalCarrinho);
+		
 	}
 	
 	public static void compra()
@@ -67,7 +93,7 @@ public class Projeto {
 	    int podIn=0,qIn;	
 		
 		imprimirEstoque();
-		
+		linha();
 		do
 		{
 			System.out.print("Digite o código do produto que você deseja comprar : ");
@@ -109,8 +135,9 @@ public class Projeto {
 		
 		System.out.printf("Produto : %s\nQuantidade : %d\nADICIONADO AO CARRINHO",produtoNome[podIn],quantIn[podIn]);
 		
+		System.out.println();
 		
-		System.out.println("\nFalta a fução carrinho");
+		imprimirCarrinho();
         }
 
 }
