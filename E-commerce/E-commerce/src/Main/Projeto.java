@@ -24,10 +24,9 @@ public class Projeto {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		compra();		
+		
 		imprimirEstoque();
-		
-		
-		
 		
 		
 		leia.close();
@@ -62,5 +61,56 @@ public class Projeto {
 		}
 
 	}
+	
+	public static void compra()
+	    {
+	    int podIn=0,qIn;	
+		
+		imprimirEstoque();
+		
+		do
+		{
+			System.out.print("Digite o código do produto que você deseja comprar : ");
+			
+			podIn = leia.nextInt();
+			
+			if(podIn<0 || podIn>9)
+			{
+				System.out.println("Código inválido, digite novamente.");
+			}
+		
+		
+		}while(podIn<0 || podIn>9);
+		
+	
+		do
+		{
+	
+			System.out.printf("Pruduto : %s, foi selecionado. Digite a quantidade : ",produtoNome[podIn]);
+			qIn = leia.nextInt();
+			
+			if( (qIn>quantEstoque[podIn]) || qIn<=0)
+			{
+				System.out.println("Quantidade inválida, digite novamente.");
+			}
+			
+		}while((qIn>quantEstoque[podIn]) || qIn<=0);
+		
+		
+		quantIn[podIn] += qIn;
+		
+		valorTotal[podIn]=quantIn[podIn]* valorUnitario[podIn];
+		
+		valorTaxa[podIn]=valorTotal[podIn]*0.09;
+		
+		valorTotal[podIn]+=valorTaxa[podIn];
+		
+		quantEstoque[podIn]-=qIn;
+		
+		System.out.printf("Produto : %s\nQuantidade : %d\nADICIONADO AO CARRINHO",produtoNome[podIn],quantIn[podIn]);
+		
+		
+		System.out.println("\nFalta a fução carrinho");
+        }
 
 }
