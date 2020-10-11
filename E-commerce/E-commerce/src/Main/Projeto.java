@@ -19,7 +19,7 @@ public class Projeto {
 	public static double valorUnitario[] = { 86, 90, 40, 35, 50, 60, 32, 30, 50, 63 },
 			valorTotal[] = new double[10],
 			valorTotalCarrinho, impostoTotalCarrinho,
-			DescontoAvista = 0,
+			descontoAvista = 0,
 			valorTaxa[] = new double[10];
 	
 	public static boolean carrinho = false,
@@ -85,14 +85,16 @@ public class Projeto {
 							System.out.println("Opção invalida");
 							}
 							
-							if(navIntCarrinhoIn == 1) // menu finalizar compra
+							if(navIntCarrinhoIn == 1) // menu de pagamento
 							{
-								System.out.println("Função compra");
+								pagamento();
 								
 								navegadorInternoIn =0;
 								navIntCarrinhoIn = 0;
-								System.out.println("Compra finalizada");
+								System.out.println();
 								linha();
+								System.out.println("Compra finalizada");
+								
 								linha();
 								while (true) {
 									System.out.println("Novo usuario ? \n1 - sim \n0 - sair do programa  ");
@@ -171,11 +173,63 @@ public class Projeto {
 		
 	}
 	
+	public static void pagamento () {
+		imprimirCarrinho();
+		int opcIn , opcIn2;
+		while (true) {
+			System.out.print("Qual a forma de pagamento, 1 - A vista (10% OFF)/ 2 - parcelado (até 3 vezes sem juros)");
+			opcIn =	leia.nextInt();
+		
+			if (opcIn ==1 || opcIn ==2) break;
+			
+			System.out.println("Codigo invalido !!");
+		}
+		
+		if (opcIn == 1) {
+			
+			descontoAvista = valorTotalCarrinho*0.1 ;
+			ImprimirNota ();
+			
+		}
+		
+		if (opcIn == 2 ) {
+			while (true) {
+			System.out.print("Digite o número de parcelas, (2 ou 3 vezes): ");
+			opcIn2 = leia.nextInt();
+			 if (opcIn2 == 2 || opcIn2 == 3) break;
+				System.out.println("Codigo invalido !!");
+			
+			}
+			
+			parcelaIn = opcIn2;
+			ImprimirNota ();
+		}
+		
+		
+		
+	}
+	
+	public static void ImprimirNota () {
+		imprimirCarrinho();
+		
+		
+		
+		if (descontoAvista >0) {
+			linha();
+			System.out.println("\nNOTA FISCAL");
+			System.out.printf("Desconto %.2f \n Valor imposto R$ %.2f \n Valor total com desconto R$ %.2f ", descontoAvista , impostoTotalCarrinho , (valorTotalCarrinho - descontoAvista));
+		}
+		 else {
+				System.out.println("\nNOTA FISCAL");
+				System.out.printf("Quantidade de parcelas %d \n Valor imposto R$ %.2f \n Valor por parcela R$ %.2f", parcelaIn , impostoTotalCarrinho ,( valorTotalCarrinho/parcelaIn));
+		 }
+	}
+	
 	public static void novoUsuario() {
 		nomeIn = "";
 		sexoIn = ' ';
 		coletaNome = false;
-		DescontoAvista = 0;
+		descontoAvista = 0;
 		parcelaIn = 0;
 		valorTotalCarrinho = 0;
 		impostoTotalCarrinho = 0;
