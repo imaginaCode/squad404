@@ -97,17 +97,21 @@ public class Projeto {
 								
 								linha();
 								while (true) {
-									System.out.println("Novo usuario ? \n1 - sim \n0 - sair do programa  ");
+									navegadorInternoIn = 5;
+									System.out.print("Novo usuario ? \n1 - sim \n0 - sair do programa :");
 									navegadorInternoIn = leia.nextInt();
 									if (navegadorInternoIn == 0 || navegadorInternoIn == 1) break;
 									
 								}
 								if(navegadorInternoIn == 1)
 								{
+									System.out.println("Novo Usuario");
 									novoUsuario();
+									System.out.println("Novo Disponivel");
 									navegadorInternoIn = 0;
 									menuprincipalIn =1;
 									navIntCarrinhoIn = 0;
+									break;
 									
 								} 
 								else if (navegadorInternoIn == 0) 
@@ -128,22 +132,23 @@ public class Projeto {
 									
 									while (true)
 									{
-										System.out.println("Retirar outro item: 1 - sim / 0 - nao :");
+										System.out.println("Digite: 1 - retirar outro item \n 2 - para menu carrinho \n 0 - menu principal :");
 										navegadorInternoIn = leia.nextInt();
-										if (navegadorInternoIn == 0) break;
+										if (navegadorInternoIn == 0 || navegadorInternoIn == 1 || navegadorInternoIn == 2) break;
 										System.out.println("Opção invalida");
 									}
 									
-									if (navegadorInternoIn == 0) break;
+									if (navegadorInternoIn == 0 || navegadorInternoIn == 2) break;
 								}
 								
 								
-							} else if (navIntCarrinhoIn == 3) {
+							} else if (navIntCarrinhoIn == 3) // imprimir carrinho
+							{
 								imprimirCarrinho();
 								while(true) {
-									System.out.println("Digite 0 para voltar ao menu principal");
+									System.out.println("Digite 1 - menu carrinho / 0 - para voltar ao menu principal");
 									navegadorInternoIn = leia.nextInt();
-									if(navegadorInternoIn == 0 ) break;
+									if(navegadorInternoIn == 0 ||navegadorInternoIn == 1) break;
 									
 								}
 								
@@ -242,12 +247,11 @@ public class Projeto {
 		descontoAvista = 0;
 		parcelaIn = 0;
 		valorTotalCarrinho = 0;
-		impostoTotalCarrinho = 0;
+		impostoTotalCarrinho = 0;		
 		for(int contador=0;contador<10;contador++) {
 			quantIn [contador]= 0;
 			valorTaxa [contador] = 0.0;
-			valorTotal [contador] = 0.0;
-			
+			valorTotal [contador] = 0.0;			
 		}
 	}
 	
@@ -272,16 +276,19 @@ public class Projeto {
 		System.out.println("Cod In Fantasy store");
 		linha();
 		coletaNome = true;
-
+		nomeIn = "";
 		System.out.print(" Por favor digite o seu primeiro nome : ");
-		nomeIn = leia.nextLine();
+		
+		nomeIn = leia.next();
+		
 
 		//System.out.println(nomeIn);
 		do {
 			System.out.print("Digite o seu sexo : H-homem, M-mulher, O-outros ");
 			sexoIn = leia.next().toUpperCase().charAt(0);
 
-		} while (sexoIn != 'H' && sexoIn != 'M' && sexoIn != 'O');	
+		} while (sexoIn != 'H' && sexoIn != 'M' && sexoIn != 'O');
+		
 
 	}
 	
@@ -384,33 +391,32 @@ public class Projeto {
 			
 			imprimirCarrinho();
 			linha();
-			do
-			{
+			while (true) {
 				System.out.print("Digite o código do produto que você deseja remover : ");
 				
 				podIn = leia.nextInt();
 				
-				if(podIn<0 || podIn>9)
-				{
-					System.out.println("Código inválido, digite novamente.");
-				}
-			
-			
-			}while(podIn<0 || podIn>9);
-			
+				if (quantIn[podIn] > 0) break;
+				
+				
+				System.out.println("Código inválido, digite novamente.");
+				
+			}
 		
-			do
-			{
-		
+			while (true) {
 				System.out.printf("Produto : %s, foi selecionado. Digite a quantidade que deseja remover : ",produtoNome[podIn]);
 				qIn = leia.nextInt();
 				
-				if( (qIn>quantEstoque[podIn]) || qIn<=0)
-				{
-					System.out.println("Quantidade inválida, digite novamente.");
-				}
+				if( qIn >=0  && qIn<=quantIn[podIn]  ) break;
 				
-			}while((qIn>quantEstoque[podIn]) || qIn<=0);
+					System.out.println("Quantidade inválida, digite novamente.");
+				
+				
+			}
+		
+				
+				
+			
 			
 			
 			quantIn[podIn] -= qIn;
