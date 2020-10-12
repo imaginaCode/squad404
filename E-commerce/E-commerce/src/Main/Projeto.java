@@ -79,9 +79,9 @@ public class Projeto {
 						checarCarrinho();
 						if(carrinho) {
 							while (true) {
-							System.out.println("Digite: \n 1 - finalizar compra \n 2 - editar carrinho \n 0 - para menu principal \n Leitura :");
+							System.out.println("Digite: \n 1 - finalizar compra \n 2 - editar carrinho \n 3 - vizualizar carrinho \n 0 - para menu principal \n Leitura :");
 							navIntCarrinhoIn = leia.nextInt();
-							if (navIntCarrinhoIn == 1 || navIntCarrinhoIn == 2  || navIntCarrinhoIn == 0) break;
+							if (navIntCarrinhoIn == 1 || navIntCarrinhoIn == 2  || navIntCarrinhoIn == 0 || navIntCarrinhoIn == 3) break;
 							System.out.println("Opção invalida");
 							}
 							
@@ -138,7 +138,17 @@ public class Projeto {
 								}
 								
 								
-							} 
+							} else if (navIntCarrinhoIn == 3) {
+								imprimirCarrinho();
+								while(true) {
+									System.out.println("Digite 0 para voltar ao menu principal");
+									navegadorInternoIn = leia.nextInt();
+									if(navegadorInternoIn == 0 ) break;
+									
+								}
+								
+								
+							}
 							
 							else // escape
 							{
@@ -263,8 +273,8 @@ public class Projeto {
 		linha();
 		coletaNome = true;
 
-		System.out.print(" Por favor digite o seu nome : ");
-		nomeIn = leia.next();
+		System.out.print(" Por favor digite o seu primeiro nome : ");
+		nomeIn = leia.nextLine();
 
 		//System.out.println(nomeIn);
 		do {
